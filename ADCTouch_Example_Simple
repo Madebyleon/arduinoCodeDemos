@@ -1,0 +1,34 @@
+#include <ADCTouch.h>
+
+int ref0;     //reference values to remove offset
+
+int buttonPin = A0; // This is referencing the analog pin we are using as a sensor.
+
+// You can make as many as you'd like.
+// The Uno has pins from A0 - A5. So 6 analog input pins.
+
+void setup() {
+  Serial.begin(9600);
+  ref0 = ADCTouch.read(buttonPin, 500);    //create reference values to
+}
+
+void loop() {
+  int value0 = ADCTouch.read(A0);   //no second parameter
+  value0 -= ref0;       //remove offset
+
+  Serial.print(value0 > 40);    //send (boolean) pressed or not pressed
+  Serial.print("\t");           //use if(value > threshold) to get the state of a button
+  Serial.println(value0);       //send actual reading
+
+  // Conditional logic here
+
+  if (value0 == 1) {
+
+    // Do this...
+  } else {
+
+    // Do this instead...
+  }
+
+  delay(100);
+}
